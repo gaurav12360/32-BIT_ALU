@@ -30,9 +30,27 @@ A Blank Document opens up into which the following source code can be typed.
 #### a)	To verify the Functionality using the Test Bench
 
 ## Source Code – Using Case Statement :
-
-(Include program here)
-
+```
+module alu_32bit_case(y,a,b,f);
+input [31:0]a;
+input [31:0]b;
+input [2:0]f;
+output reg [31:0]y;
+always@(*)
+begin
+case(f)
+3'b000:y=a&b; 
+3'b001:y=a|b; 
+3'b010:y=~(a&b); 
+3'b011:y=~(a|b); 
+3'b100:y=a^b; 
+3'b101:y=~(a^b); 
+3'b110:y=~a; 
+3'b111:y=~b; 
+endcase
+end
+endmodule
+```
 Use the Save option or Ctrl+S to save the code, or click on the save option from the top-right corner and close the text file.
 
 ## Creating a Test Bench:
@@ -40,9 +58,29 @@ Use the Save option or Ctrl+S to save the code, or click on the save option from
 Similarly, create your test bench using gedit <filename_tb>.v to open a new blank document (alu_32bit_tb_case).
 
 ## Test Bench :
-
-(Include test bench program here)
-
+```
+module alu_32bit_tb_case;
+reg [31:0]a;
+reg [31:0]b;
+reg [2:0]f;
+wire [31:0]y;
+alu_32bit_case dut(.y(y),.a(a),.b(b),.f(f));
+initial
+begin
+a=32'h00000000;
+b=32'h10101010;
+#10 f=3'b000;
+#10 f=3'b001;
+#10 f=3'b010;
+#10 f=3'b011;
+#10 f=3'b100;
+#10 f=3'b101;
+#10 f=3'b110;
+#10 f=3'b111;
+#100 $finish;
+end
+endmodule
+```
 Use the Save option or Ctrl+S to save the code, or click on the save option from the top-right corner and close the text file.
 
 ## Functional Simulation:
@@ -56,6 +94,7 @@ source /cadence/install/cshrc (mention the path of the tools)
 (The path of cshrc could vary depending on the installation destination)
 
 After this, you can see the window like below
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/4e7af1b5-9805-4b6a-9afd-9476950348a7" />
 
 #### Fig 2: Invoke the Cadence Environment
 
@@ -68,12 +107,14 @@ or
 •linux:/> nclaunch& // On subsequent calls to NCVERILOG
 
 It will invoke the nclaunch window for functional simulation. We can compile, elaborate and simulate it using Multiple Steps.
+<img width="1121" height="664" alt="image" src="https://github.com/user-attachments/assets/ecff3168-d256-401f-9d82-cc937063b0b6" />
 
 #### Fig 3: Setting Multi-step simulation
 
 Select Multiple Step and then select “Create cds.lib File” as shown in the figure below
 
 Click the .cds.lib file and save the file by clicking on the Save option
+<img width="1906" height="1029" alt="image" src="https://github.com/user-attachments/assets/98b45e80-3ab6-4c1a-bab4-7f5b079b7679" />
 
 #### Fig 4:cds.lib file Creation
 Save .lib file and select the correct option for cds.lib file format based on the HDL Language and Libraries used.
@@ -83,6 +124,7 @@ Select “Don’t include any libraries (verilog design)” from “New cds.lib 
 We are simulating a verilog design without using any libraries
 
 Click “OK” in the “nclaunch: Open Design Directory” window, as shown in the figure below
+<img width="1903" height="1022" alt="image" src="https://github.com/user-attachments/assets/3613d3d5-06f8-4e9c-8528-94d43beef37b" />
  
 #### Fig 5: Selection of Don’t include any libraries
 An ‘NCLaunch window’ appears as shown in the figure below
@@ -92,8 +134,10 @@ Left side, you can see the HDL files. The right side of the window has Worklib a
 Worklib is the directory where all the compiled codes are stored, while Snapshot will have the output of elaboration, which in turn goes for simulation.
 
 To perform the function simulation, the following three steps are involved: Compilation, Elaboration and Simulation.
+<img width="1906" height="1041" alt="image" src="https://github.com/user-attachments/assets/507ecdd3-1041-484b-a71b-07cf750711dc" />
 
 #### Fig 6: Nclaunch Window
+<img width="1919" height="1078" alt="Screenshot 2025-10-25 083357" src="https://github.com/user-attachments/assets/fb98b9b0-6f48-4b90-ae84-09cf05241816" />
 
 ### Step 1: Compilation:
 – Process to check the correct Verilog language syntax and usage
@@ -120,6 +164,7 @@ After compilation, it will come under worklib. You can see on the right side win
 select the test bench and compile it. It will come under Worklib. Under Worklib, you can see the module and test bench.
 
 The cds.lib file is an ASCII text file. It defines which libraries are accessible and where they are located. It contains statements that map logical library names to their physical directory paths. For this Design, you will define a library called “worklib”
+<img width="1919" height="1079" alt="Screenshot 2025-10-25 083415" src="https://github.com/user-attachments/assets/819017e1-6a17-4801-86dd-fa9c8ec6ccf8" />
 
 ### Step 2: Elaboration:
 To check the port connections in a hierarchical design
@@ -144,6 +189,7 @@ Outputs: Elaborate database updated in the mapped library if successful, generat
 After elaboration, the file will come under snapshot. Select the test bench and simulate it.
 
 #### Fig 8: Elaboration Launch Option
+<img width="1919" height="1079" alt="Screenshot 2025-10-25 083520" src="https://github.com/user-attachments/assets/e413bca4-543e-4294-864d-c25cae8fc7a5" />
 
 ### Step 3: Simulation:
 – Simulate with the given test vectors over a period of time to observe the output behaviour.
@@ -156,7 +202,9 @@ Simulations allow dumping design and test bench signals into a waveform
 
 Steps for simulation – Run the simulation command with simulator options
 
+
 #### Fig 9: Design Browser window for simulation
+<img width="1919" height="1078" alt="image" src="https://github.com/user-attachments/assets/d139844c-6512-4537-970c-0f8bb3236857" />
 
 #### Fig 10: Simulation Waveform Window
 
@@ -165,6 +213,7 @@ Synthesis requires three files as follows,
 ◦ Liberty Files (.lib)
 
 ◦ Verilog/VHDL Files (.v or .vhdl or .vhd)
+<img width="1919" height="1079" alt="Screenshot 2025-10-25 084201" src="https://github.com/user-attachments/assets/8648295c-2b27-4a1e-8770-171ba47f1efe" />
 
 ### Performing Synthesis
 The Liberty files are present in the library path,
@@ -176,8 +225,11 @@ The Liberty files are present in the library path,
 • Genus Script file with .tcl file Extension commands are executed one by one to synthesize the netlist. Or use source run.tcl command in the terminal window to view the netlist, and a log file will be created in the working folder.
 
 #### Fig 11: Synthesis RTL Schematic 
+<img width="1919" height="1079" alt="Screenshot 2025-10-25 084803" src="https://github.com/user-attachments/assets/d938b9a5-353c-4418-a7d4-50415ab03ffc" />
 
 #### Fig 12: Area report
+![Uploading image.png…]()
+
 
 #### Fig 13: Power Report
 
