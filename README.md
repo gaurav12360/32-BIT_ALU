@@ -228,10 +228,12 @@ The Liberty files are present in the library path,
 <img width="1919" height="1079" alt="Screenshot 2025-10-25 084803" src="https://github.com/user-attachments/assets/d938b9a5-353c-4418-a7d4-50415ab03ffc" />
 
 #### Fig 12: Area report
-![Uploading image.png…]()
+<img width="1627" height="986" alt="image" src="https://github.com/user-attachments/assets/6d07de1f-a1e6-4d9c-bb41-2b55003343ee" />
+
 
 
 #### Fig 13: Power Report
+<img width="1894" height="1029" alt="image" src="https://github.com/user-attachments/assets/f3d9dcc5-deb6-4946-9b48-8ab83ecd04a8" />
 
 ## Result
 The functionality of the 32-bit ALU was successfully verified using a test bench and simulated with the nclaunch tool. Additionally, the generic netlist of the 32-bit ALU was generated, and the corresponding area and power reports were analyzed and tabulated using Cadence Genus.
